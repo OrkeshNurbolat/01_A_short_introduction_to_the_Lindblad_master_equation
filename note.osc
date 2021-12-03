@@ -1,0 +1,1424 @@
+%remember #include somthing is a sentence ends with ; 
+%#include"/home/orkesh/doc/osc/basic.osc";
+#include"/home/wmc/doc/osc/basic.osc";
+
+
+hA hat A;
+hO hat O;
+hE hat E;
+hS hat S;
+
+
+hH hat H ; 
+hA hat A;
+hS hat S;
+hB hat B;
+hO hat O;
+hJ hat J;
+hL hat L;
+SB S B;
+hr hat rho ; 
+ao hat a; 
+ad cont ao ; 
+bo hat b; 
+bd cont bo ; 
+kp k prime ; 
+kpp k dprime ;
+tp t prime;
+tpp t dprime;
+np n prime ; 
+npp n dprime ; 
+
+
+!\title{Note about : A short introduction to the Lindblad master equation}
+!\author{Orkesh Nurbolat}
+!\maketitle
+
+
+! \textbf{Glossary} : \\  
+
+!\begin{itemize}
+!\item 
+$ maH ; 
+! represents a Hilber space 
+
+!\item 
+Ham hat H ; 
+$ ket psi in maH ; 
+! represents a vector of Hilbert space
+$ maH ; 
+!  (a column vector)
+
+!\item 
+$ bra psi in maH ; 
+! represents a vector of the dual Hilbert space of  
+$ maH ; 
+!  (a row vector) . 
+
+!\item 
+$ braket psi phi in Complex ; 
+! is the scakar product of vectors 
+$ ket psi ; 
+! and
+$ ket phi ; 
+
+
+!\item 
+$ norm { mspc  ket psi } ; 
+! is the norm of the vector 
+$ ket psi ; 
+! where there is 
+$ norm { mspc ket psi } = sqrt braket psi psi ; 
+
+!\item 
+	$ B (maH) ; 
+	! represents the space of bounded operatores : 
+	$ B:maH mpst maH  ; 
+	
+	!\item 
+	$ One_maH in B (maH);
+	! is the identity operator of the Hilber space
+	$ maH ; 
+	! .s.t.
+	$ One ket psi = ket psi , forall ket psi in maH; 
+	
+	!\item 
+	$ ket psi bra phi in B (maH) ; 
+	! is the operator such tath 
+	$  (ket psi bra phi) ket vrp = braket phi vrp ket psi , forall ket vrp in maH ; 
+	
+	!\item 
+	$ cont hat O ; 
+	! is the hermitian conjugate of operator : 
+	$ hat O in B (maH) ; 
+	
+	!\item
+	$ hat U in B (maH) ; 
+	! is the unitary operator iff  
+	$ hat U cont hat U = cont hat U hat U = One ; 
+	
+	!\item 
+	$ hat H in B (maH);
+	! is a Hermitian operator iff  
+	$ hat H = cont hat H  ; 
+	
+	!\item
+	$ hat A in B (maH) ; 
+	! is a positive operator 
+	$  (A > 0 ), iff 
+	bra phi hat A ket phi > 0 , forall ket phi in maH ; 
+	
+	!\item 
+	$ hat P in B (maH) ; 	
+	! is a projector 
+	$ iff hat P hat P = hat P  ; 	
+
+	!\item
+	$ tr B  ; 
+	! represents the trace of operator B 
+
+	!\item
+	$ rho  (maL) ; 
+	! repressets the space of density matrices, meaning the space of
+	! bounded operators action on
+	$ maH ; 
+	! with trace 1 and positive
+
+	!\item
+	$ dket rho   ; 
+	! is a vector in the Fock-Liouville space
+
+	!\item
+	$ dbraket hat A  hat B   = tr {cont hat A hat B}; 
+	! is the scalar product of operators 
+	$ hat A , hat B in B (maH) ; 
+	! in the Fock-Liouville space
+
+	!\item
+	$ sim maL ; 
+	! is the matrix representation of a super operator in the
+	! Fock-Liuville space
+	
+
+!\end{itemize}
+
+
+! \section{Looking back to quantum mechanics}
+
+!\subsection{density matrix}
+! the density matrix is like : 
+hrho hat rho ;
+@@
+	hrho defto sum_i p_i ket{psi_i} bra{psi_i}
+;
+! and this 
+$ p_i ; 
+! coefficient are non-negative and
+$ sum {p_i} = 1  ; 
+! which is a thing called probability , I belive there is 
+$ p_i in Real ; 
+! as well .
+! it means that
+$ p_i ; 
+! is the probablity that system is in the pure state 
+$ ket{psi_j} ; 
+
+! so there is : 
+
+@@
+  tr hrho 
+&= 
+	sum p_j = 1  
+;
+! what the trace does is to take the diogonal elements and
+! put them at the place needed
+! all the time this holds
+
+! and there is aways positive , aka
+@@
+  hrho > 0 
+;
+
+! there is 
+$ tr {hrho ^2} ; 
+! called the purity of the state . 
+! somehow it measures something like 
+$ 1/d leq  tr {hrho ^2} leq 1 ; 
+!\\
+
+! now, given arbitary basis like : 
+$ rp {ket i}_{i=1} ^N ; 
+
+! which is ofcourse in the Hilbert space , then 
+! the density matrix will be looking like : 
+
+@@
+  hrho
+& =
+	Mtx {
+		rho_{00} & rho_{01} &...... &rho_{0N} \\  
+		rho_{10} & rho_{11} &...... &rho_{0N} \\  
+		...... & ...... &...... &...... \\  
+		rho_{N 0} & rho_{N 1} &...... &rho_{N N} \\  
+	}
+;
+
+
+
+!\textit{populations}
+! means the diagonal element of the density matrix , 
+! and there is 
+$ rho_{i i} in Real_0 ^+ ; 
+! and also 
+$ sum_i rho_{i,i} = 1 ; 
+
+!\\as we know there is  
+$ maH_2 = maH otms maH ; 
+
+!A pure state of the system would be any unit vector of 
+$ maH_2 ; 
+
+! we can say : 
+$ ket psi = a ket 0 + b ket 1 ; 
+
+! and 
+$ a , b in Complex ; 
+! s.t
+$  |a | ^2 +  |b | ^2 = a conj a +b conj b  = 1 ; 
+! so : 
+$ hrho in O (maH) ; 
+
+@@
+  hrho  
+&=
+	Mtx {
+		rho_00 & rho_01 \\
+		rho_10 & rho_11 \\
+	}
+= rho_00 ket 0 bra 0 
+	+ rho_01 ket 0 bra 1 
+	+ rho_10 ket 1 bra 0 
+	+ rho_11 ket 1 bra 1 
+;
+
+! and here we have
+
+@@
+  rho_00 +rho_11
+&=
+	 |braket 0 psi  | ^2
+	+ |braket 1 psi  | ^2
+= 1 
+;
+! and there is as well : 
+@@
+  rho_01 = conj {rho_10}
+;
+
+!\subsection{about other operators}
+! an operator is in the form of 
+
+@@
+  hat O 
+& = 
+	sum_i a_i ket{a_i} bra {a_i}
+;
+! where this 
+$ a_i in Real ; 
+! is in the operator 
+$ hat O ; 
+! 's space 
+
+! so here we can write that : 
+@@
+  mean hat O
+&=
+	sum_i p_i 
+		tr hat O  
+\\&=
+	sum_i p_i 
+		bra{psi_i} hat O ket{psi_i}
+\\&=
+	sum_i  
+		tr  { 
+			p_i
+			ket{psi_i} bra{psi_i} hat O 
+		}
+\\&=
+		tr  { 
+			sum_i  
+			p_i
+			ket{psi_i} bra{psi_i} hat O 
+		}
+\\&=
+	tr  { 
+		hrho hat O 
+	}
+=
+	tr  { 
+		hat O hrho 
+	}
+;
+
+
+! if this operator
+$ hat O  ; 
+! has an spectral resolution like : 
+@@
+  hat O 
+& = 	
+	sum_i a_i ket{a_i} bra{a_i}
+\\ & = 
+	sum_i a_i P_i
+;
+
+! now after the measurement it writes that :
+@@
+  P (a_i)
+&=
+	 | braket phi {a_i}  |  ^2
+;
+
+!why there is an :
+$ a_i ; 
+! instead of just
+$ i ; 
+! ? I am confued , 
+! here what it would like to say might be
+$ a_i ; 
+! is constant mapped from i , and it can degenerate
+
+! anyway : 
+
+@@
+  mean hat O 
+& =
+	bra psi 
+	hat O 
+	ket psi
+;
+
+! and
+@@
+  P (a_i)
+&=
+	 |braket phi {a_i} |  ^2
+\\&=
+	tr{ hrho ket{a_i} bra{a_i}}	
+
+;
+! and for example it can be writen as : 
+@@
+&	tr{ 
+		[
+			rho_00 ket 0 bra 0 
+			+ rho_01 ket 0 bra 1 
+			+ rho_10 ket 1 bra 0 
+			+ rho_11 ket 1 bra 1  
+		]
+		ket{a_i} bra{a_i}
+	}	
+\\ & = 
+	 (	
+		rho_00 ket 0 bra 0 
+		+ rho_11 ket 1 bra 1 
+	)
+	ket{a_i} bra{a_i}
+\\ & =
+	rho_00  | braket 0 {a_i} | ^2
+	+ rho_11  | braket 1 {a_i} | ^2
+;
+
+! and then here it writes that : 
+@@
+  mean hat O 
+& = 
+	tr {hat O hrho}
+;
+
+! a minimal Hamiltonina looks like : 
+@@
+  Ham
+& = 
+	E_0 ket 0 bra 0 
+	+ E_1 ket 1 bra 1
+;
+
+! and we say that
+$ psi = a ket 0 + b ket 1 ; 
+! so here comes that : 
+@@ P (E_0) =  |braket 0 psi | ^2 =  |a | ^2 \\ 
+ P (E_1) =  |braket 1 psi | ^2 =  |b | ^2 ; 
+
+! so there we have that : 
+@@
+  mean Ham
+& = 
+	E_0  |a | ^2
+	+ E_1  |b | ^2
+;
+
+! in the language of density matrix : 
+@@
+  hrho
+& = 
+	rho_00 ket 0 bra 0 
+	+ rho_01 ket 0 bra 1
+	+ rho_10 ket 1 bra 0
+	+ rho_11 ket 1 bra 1
+;
+! now here the writer changed the language back to that : 
+$ P (0) = tr{ ket 0 bra 0  hrho }
+	= rho_00
+;
+
+! and we have that:
+@@
+	mean Ham
+& = 
+	tr{ Ham hrho } 
+= E_0 rho_00 
+ 	+ E_1 rho_11
+;
+
+! so we can know that here we have : 
+$ rho_00 =  |a | ^2 ; 
+! and
+$ rho_11 =  |b | ^2 ; 
+
+! and we know that : 
+@@
+  tx d // tx 'dt' 
+	ket {psi (t)} 
+& = 
+	- ii hb Ham ket{psi (t)}
+;
+! this papers like to set that : 
+$ hb = 1  ; 
+! and we wil have the time independent
+$ Ham ; 
+! causing  : 
+@@
+	ket{psi (t)} 
+&=	
+	exp{-ii Ham t} ket{psi (0)}
+;
+! which is as well as  :
+@@
+  ket{psi (t)}  
+&= hat U 
+  ket{psi (0)}  
+;
+
+! here we know that : 
+$
+  hat U in B (maH)
+	st
+	hat U cont hat U 
+=
+	cont 	hat U hat U 
+=
+	One	
+;
+
+! so here also have something speaking that : 
+@@
+  dd hrho  t 
+& = - ii [Ham , hrho ]
+defto maL hrho 
+;
+
+! which was called von Neumann equation 
+
+! and then here goes like 
+
+@@
+  dd void t 
+	tr hrho ^2
+&=
+	tr{ dd {hrho ^2} t }
+\\&=
+	tr{ 2 hrho dd hrho t }
+\\&=
+	-2 ii tr{ hrho [Ham , hrho] }
+\\&= 0 
+;
+
+! now we can write that : 
+@@
+  Ham_'free' = E_0 ket 0 bra 0 + E_1 ket 1 bra 1 
+;
+
+! why wont one start with 
+$ ket{psi (0)}  = ket 1; 
+! so that we have 
+$ ket{psi (t)} = exp{-ii Ham t }  = exp{ - ii E_1 t } ket 1 ; 
+
+
+! I dont know if we can actually do this without losing any generality : 
+@@
+  Ham_'free' = E ket 1 bra 1
+;
+
+! and then there goes that : 
+@@
+  Ham
+& = 
+	E ket 1 bra 1 
+	+ Om (ket 0 bra 1 + ket 1 bra 0 )
+;
+
+! and in the ine it has something to say that : 
+@@
+  maH 
+&=
+	maH_1 otms maH_2 otms ... otms maH_N
+\\
+	ket psi 
+&=
+	ket{psi_1} otms ket{psi_2} otms ... otms ket{psi_N}
+\\
+	hrho
+& = 
+	hrho_1 otms hrho_2 otms ... otms hrho_N
+;
+
+
+! so for simpler use we just say that : 
+$ ket psi = ket{psi_1} otms ket {psi_2} ; 
+! for seperatable varaibales ofcouse here we say that : 
+$ ket psi = sum_{i,j} ket{psi_i} otms ket{psi_j} ; 
+! \\
+
+
+! so now if we have that
+$ maH = maH_1 otms maH_2 ; 
+! and the density matrix could be expressed as 
+@@
+  hrho_a
+&=
+	tx 'Tr' _b [hrho]
+;
+
+
+! because 
+@@
+  tx 'Tr' _b '\left['
+		sum_{i,j,k,l}
+			ket{a_i} bra{a_j}
+			otms ket{b_k} bra {b_l}
+	'\right]'
+& = 
+	sum_{i,j}
+		ket{a_i} bra{a_j}
+  tr{	
+		sum_{k,l}
+			ket{b_k} bra {b_l}
+	}
+;
+
+!\subsection{2 level atioms example}
+! say : 
+@@
+ ket 00 &= ket 0 _ 1 otms ket 0 _ 2 \\ 
+ ket 01 &= ket 0 _ 1 otms ket 1 _ 2 \\ 
+ ket 10 &= ket 1 _ 1 otms ket 0 _ 2 \\ 
+ ket 11 &= ket 1 _ 1 otms ket 1 _ 2 \\ 
+;
+! is better with : 
+
+@@
+  ket psi _ G & = ket 00 \\
+	ket psi _ S  
+& = 
+	1 / sqrt 2  ( ket 0 _ 1 + ket 1 _ 1 )
+	otms 1 / sqrt 2  ( ket 0 _ 2 + ket 1 _ 2 ) \\
+& = 
+	1/2 ( ket 00 + ket 10 + ket 01 + ket 11) \\ 
+	
+	ket psi _ E 
+&=
+	1/ sqrt 2  ( ket 00 + ket 11 )
+;
+
+! so here it can write that 
+@@
+  hrho _ E 
+& = 
+	1/2  (ket 00 bra 00 + ket 00 bra 11 + ket 11 bra 00 + ket 11 bra 11)
+;
+
+! and lets say there : 
+@@
+  hrho_E ^ (1)
+& = 
+	bra 0 _2 hrho_E ket 0 _2
+	+ bra 1 _2 hrho_E ket 1 _2
+\\&=
+	1/2  ( ket 00 bra 00 _1 + ket 11 bra 11 _ 2 )
+;
+
+
+! \subsection{Fock-Liouvile Hlbert space  (FLS)}
+
+! defineing the thing like : 
+$ hrho imp dket hrho ; 
+
+
+
+
+! so there is a realation that writes : 
+
+@@
+  dket hrho 
+&= 
+	Mtx{
+		rho_00 \\
+		rho_10 \\
+		rho_01 \\
+		rho_11 \\
+	}
+;
+
+! and then it says that it has the Liouvillian superoperator 
+! can bow be expressed as a matrix 
+@@
+  sim maL
+&=
+	Mtx {
+		 0 & ii Om & - ii Om & 0 \\ 
+		 ii Om & ii E & 0 & - ii Om \\
+		 -ii Om & 0 - ii E & ii Om \\
+		 0 & - ii Om & ii Om & 0 
+	}
+;
+
+! this is kindof like a Schrodingers equation thoght : 
+$ dd dket hrho t  = sim maL dket hrho ; 
+@@
+ 	dd void t
+	Mtx{
+		rho_00 \\
+		rho_10 \\
+		rho_01 \\
+		rho_11 \\
+	}
+& = 
+	Mtx {
+		 0 & ii Om & - ii Om & 0 \\ 
+		 ii Om & ii E & 0 & - ii Om \\
+		 -ii Om & 0 - ii E & ii Om \\
+		 0 & - ii Om & ii Om & 0 
+	}
+
+	Mtx{
+		rho_00 \\
+		rho_10 \\
+		rho_01 \\
+		rho_11 \\
+	}
+;
+
+!\section{ CPT-MAPS and the Lindblad Master Equation }
+!\subsection{what is Lindblad master equation}
+
+@@
+  dd hrho t
+&=
+	- ii/hb comu Ham hrho
+	+ sum_{n,m=1} ^{N ^2-1}
+		h_{n m}bp{
+			hA_n hrho cont hA_m 
+			- 1/2 mrp{
+				cont hA_m hA_n , hrho
+			}
+		}
+;
+! it gives : 
+!\begin{itemize}
+	!\item
+	$ mrp{ hA_m} ;! : arbitary orthonormal basis 
+	! that satisfies :
+	$  | | hA  | |_{H S} ^2 = sum_{i in I}  | |hA e_i | | ^2 ; 
+	! or Hilbert-Schmidt operator
+	$ hA_{N ^2} ; 
+	! is proportional to the identiy operator
+
+
+	!\item
+	$ h_{nm} ; !: must be positive semidefinite 
+	! with it being all zero, there it back to 
+	$ dd hrho t = - (ii by hb) comu Ham hrho ; 
+
+!\end{itemize}
+
+!\subsection{Completely positve maps  (CPT)}
+
+! so there need a kind of map
+@@ maV : hrho (maH) mpst  hrho (maH) ; 
+
+! it will need :
+@@
+  tr {maV hat A}
+&= 
+	tr {hat A}
+	m4spc forall A in O (maH)
+;
+
+! and it need to be completely positive , which means :
+@@
+  & maV tx '\ is\ positive\ ' iff 
+	forall A in B (maH) st
+	A geq 0 Imp maV A geq  0
+\\
+  & maV tx '\ is\ completly\ positive\ ' iff 
+	forall n in Natural st
+	, maV otms One_n tx "\ is\ positive\ " 
+;
+! so the positive means that it has all the eigen values positive
+! not all maps are completely positive , for example : 
+@@
+  ket{psi_B}
+& =	
+	1 / sqrt 2  ( ket 01 + ket 10 )
+;
+
+! so there is its density matrix : 
+
+@@
+  hrho_B &= 1/2  (
+		ket 0 bra 0 otms ket 1 bra 1 
+		+ ket 1 bra 1 otms ket 0 bra 0 
+		+ ket 0 bra 1 otms ket 1 bra 0 
+		+ ket 1 bra 0 otms ket 0 bra 1 
+	)
+\\&=		
+	1/2 '\left\{'
+		Mtx{ 
+			1 & 0 \\ 
+			0 & 0 \\ 
+		}
+		otms Mtx{ 
+			0 & 0 \\ 
+			0 & 1 \\ 
+		}
+		+ Mtx{ 
+			0 & 0 \\ 
+			0 & 1 \\ 
+		}
+		otms Mtx{ 
+			1 & 0 \\ 
+			0 & 0 \\ 
+		}
+		+ Mtx{ 
+			0 & 0 \\ 
+			1 & 0 \\ 
+		}
+		otms Mtx{ 
+			0 & 1 \\ 
+			0 & 0 \\ 
+		}
+		+ Mtx{ 
+			0 & 1 \\ 
+			0 & 0 \\ 
+		}
+		otms Mtx{ 
+			0 & 0 \\ 
+			1 & 0 \\ 
+		}
+	'\right\}'
+\\&=		
+	1/2 '\left\{'
+	Mtx{
+		0&0&0&0\\
+		0&1&0&0\\
+		0&0&0&0\\
+		0&0&0&0\\
+	}
+	+ Mtx{
+		0&0&0&0\\
+		0&0&0&0\\
+		0&0&1&0\\
+		0&0&0&0\\
+	}
+	+ Mtx{
+		0&0&0&0\\
+		0&0&0&0\\
+		0&1&0&0\\
+		0&0&0&0\\
+	}
+	+ Mtx{
+		0&0&0&0\\
+		0&0&1&0\\
+		0&0&0&0\\
+		0&0&0&0\\
+	}
+	'\right\}'
+\\ &=
+
+	1/2 Mtx{
+		0&0&0&0\\
+		0&1&1&0\\
+		0&1&1&0\\
+		0&0&0&0\\
+	}
+;
+
+! that looks positive , but : 
+! given that 
+$ hh T_2 ; 
+! is a map called transformation which works on matrix  (aka operators)like
+$ maV ; 
+! means that we transpose the matrxi of the secound subsystem 
+! now it gives that
+@@
+   (One otms hh T_2 ) hrho_B
+&=
+	1/2 '\left\{'
+		Mtx{ 
+			1 & 0 \\ 
+			0 & 0 \\ 
+		}
+		otms Mtx{ 
+			0 & 0 \\ 
+			0 & 1 \\ 
+		}
+		+ Mtx{ 
+			0 & 0 \\ 
+			0 & 1 \\ 
+		}
+		otms Mtx{ 
+			1 & 0 \\ 
+			0 & 0 \\ 
+		}
+		+ Mtx{ 
+			0 & 0 \\ 
+			1 & 0 \\ 
+		}
+		otms Mtx{ 
+			0 & 0 \\ 
+			1 & 0 \\ 
+		}
+		+ Mtx{ 
+			0 & 1 \\ 
+			0 & 0 \\ 
+		}
+		otms Mtx{ 
+			0 & 1 \\ 
+			0 & 0 \\ 
+		}
+	'\right\}'
+\\ &=
+	Mtx{
+		0&0&0&1\\
+		0&1&0&0\\
+		0&0&1&0\\
+		1&0&0&0\\
+	}
+;
+! and its eigen value has -1 in it , 
+
+
+! \subsection{ Drivation of the Lindblad eqiation from microscopic dynamics}
+
+@@
+  dd {hrho_T (t)} t 
+& = 
+	-ii[Ham_T , hrho_T (t)]
+;
+
+! T is short for total , E is short for Enviroment, non mean system .
+
+@@
+  hrho  (t) &=
+tx 'Tr' _E [hrho_T (t)]
+;
+! so now the environment is cut out with trace . 
+! set this to make things simplier : 
+
+@@
+  Ham_T 
+&= Ham_S otms  One_E 
+	+ One_S otms Ham_E + al Ham_I 
+;
+! (
+$ Ham in maH ; ! , 
+$ Ham_E in maH_E ;! , 
+$ Ham_I in maH_T ; ! 
+!)
+
+
+@@
+  Ham_I 
+&=	
+	sum_i 
+		hat S _i otms hat E _i
+;
+! (
+$ hat S _i in B (maH) ; ! ,  
+$ hat E _i in B (maH_E) ; 
+!)
+
+
+
+! for
+$	hO in B (maH_T)  ; 
+! there is 
+@@
+  hO (t)
+& = 
+	exp{ii (Ham + Ham_E)t}
+	hO
+	exp{-ii (Ham + Ham_E)t}
+;
+
+
+@@
+  dd { hrho_T  (t)} t
+& = 
+	- ii al [ Ham_I (t) , hrho_T (t)]
+;
+
+$ al ; ! comes from the interaction coefficinet ? 
+
+
+! integrate by time gives : 
+
+@@
+	int 
+		dd { hrho_T  (t)} t
+	der t
+
+& = 
+	- ii al
+ 	int 
+		 [ Ham_I (t) , hrho_T (t)]
+	der t
+;
+
+@@
+	hrho_T  (t) 
+& = 
+	- ii al
+ 	int 
+		 [ Ham_I (t) , hrho_T (t)]
+	der t
+\\ & = 
+	hrho_T ( 0 )
+	- ii al
+ 	int_0 ^t 
+		 [ Ham_I (s) , hrho_T (s)]
+	der s 
+;
+
+! skadoodling around gives : 
+
+@@
+  dd {hrho_T (t)} t
+& = 
+	- ii al [ Ham_I (t) , hrho_T (0) ]
+	- al ^2 int_0 ^t 
+		[Ham_I (t) , [Ham_I (s) , hrho_T (s)]]
+		der s
+;
+
+! lets do this again , this gives :  
+
+@@
+	int_0 ^t  
+		dd {hrho_T (tp)} tp
+	der tp
+&= hr_T (t) - hr_T (0)
+\\& = 
+	int_0 ^t der tp bp{
+	- ii al [ Ham_I (tp) , hrho_T (0) ]
+	- al ^2 int_0 ^tp 
+		der s
+		[Ham_I (tp) , [Ham_I (s) , hrho_T (s)]]
+	} 
+\\& = 
+	- ii al int_0 ^t bb{
+		 Ham_I (tp) , hrho_T (0) 
+	} der tp
+	- al ^2 int_0 ^t der tp
+		int_0 ^tp der s
+		[Ham_I (tp) , [Ham_I (s) , hrho_T (s)]]
+;
+! and do derivation over the result gives : 
+
+! so there is 
+@@
+	hr_T (t) 
+	& = 
+	hr_T (0)
+	- ii al int_0 ^t bb{
+		 Ham_I (tp) , hrho_T (0) 
+	} der tp
+	- al ^2 int_0 ^t der tp
+		int_0 ^tp der s
+		[Ham_I (tp) , [Ham_I (s) , hrho_T (s)]]
+;
+! do another commutationover this yields
+
+@@
+	dd hr_T (t) t
+&=
+	-ii al  bb{
+		hH_I (t) , hr_T (t)
+	}
+\\& = 
+	-ii al  bb{
+		hH_I (t) ,
+		hr_T (0)
+		- ii al int_0 ^t bb{
+			 Ham_I (tp) , hrho_T (0) 
+		} der tp
+		- al ^2 int_0 ^t der tp
+			int_0 ^tp der s
+			[Ham_I (tp) , [Ham_I (s) , hrho_T (s)]]
+	}
+\\& = 
+	-ii al  bb{
+		hH_I (t) ,
+		hr_T (0)
+	}
+	- al ^2  bb{
+		hH_I (t) ,
+		int_0 ^t der tp bb{
+			 Ham_I (tp) , hrho_T (0) 
+		} 
+	}
+	+O (al ^3)
+;
+
+! and we got : 
+@@
+ dd {hrho_T (t)} t  
+
+& = 
+	-ii al [ Ham_I (t)  , hrho_t (t)]
+\\ & = 
+	- ii al '\left[' Ham_I (t) m4spc , m4spc
+	hrho_T (0)
+	+ int_0 ^t '\left['
+		- ii al [ Ham_I (s) , hrho_T (0) ]
+			'\right]'
+	der s
+	'\right]'
+	+ O (al ^3)
+\\ & = 
+	- ii al comu {
+		Ham_I (t)   
+	} {
+		hrho_T (0)
+	}
+	- al ^2 int_0 ^t
+	 	comu { 
+			Ham_I (t) 
+		}{
+			 comu {Ham_I (s) } {hrho_T (0) }
+		}
+	der s
+	
+	+ O (al ^3)
+;
+! so we know that 
+@@
+  dd {hrho_T (t)} t 
+& = 
+	- ii al comu{
+		Ham_I (t) 
+	} { 
+		hrho_T (0)
+	}
+	- al ^2 int_0  ^t
+		comu {
+			Ham_I  (t)
+		} {
+			comu {
+				Ham_I  (s)
+			} {
+				hrho_T  (0)
+			}
+		}
+	der s
+;
+
+! with the
+$ hrho_T ; 
+! we could have the
+$ hrho ; 
+! so : 
+@@
+  dd {hrho (t)} t 
+& = 
+	trr E { dd{hrho_T (t)} t }	
+\\ & = 
+	- ii al trr E {
+		comu{
+			Ham_I (t) 
+		} { 
+			hrho_T (0)
+		}
+	}
+
+	- al ^2 int_0  ^t
+	trr E {
+		comu {
+			Ham_I  (t)
+		} {
+			comu {
+				Ham_I  (s)
+			} {
+				hrho_T  (0)
+			}
+		}
+	}
+	der s
+;
+
+!
+
+$ hrho ; ! is dependnet on  
+$ hrho_T ; ! and for start condition , it can have sperable state  
+$ hrho_T (0) = hrho (0) otms hrho_E (0) ; 
+! here assumes that the environtment is thermal , whichmeans
+@@
+  hrho_E (0)
+= 
+	expr { - { Ham_E } / T }
+	// tr expr { - {Ham_E } / T}
+;
+!  (with respection 
+$ k_B = 1 ; 
+!)
+! and this gives  :
+@@
+  mean{hE_i}
+&= tr{hE_i hrho_E (0)}
+\\
+;
+
+! for 
+$ t=0 ; 
+! we can have that :
+@@
+  trr E {
+	 comu {	Ham_I (t) } { hrho_T (0) }
+	}
+&=
+	sum_i bp{
+		hat S _i (t) hrho (0)
+		trr E {
+			hat E _i  (t) hrho_E (0)	
+		}
+		- hrho  (0) hat S _i (t)
+		trr E {
+			hrho_E (0) hat E_i (t)
+		}
+	}
+;
+
+
+! so here I can infer that : 
+@@
+ comu { Ham_I (t) } { hrho_T (0) }
+& = Ham_I (t)hrho_T (0) -hrho_T (0)Ham_I (t) 
+;
+! what evein is this index
+$ i ; ! doing here ? what is the constraints ? \\
+
+! any way , lets just assume that 
+$ mean hE_i  = tr{hE_i hrho_E (0)} =  0 ; 
+! independt pf
+$ i ;! and it gives  
+! anyway , before , we have that  
+@@
+  Ham_T
+&= Ham_S otms One_E 
+		+ One_S otms Ham_E	
+		+ al Ham_I
+;
+! but now lets write it this way : 
+@@
+  Ham_T
+&=
+	 (Ham_S + al sum_i mean{hE_i} hS_i)
+	+ Ham_E + al Ham_i prime
+;
+!reminding :  
+@@
+  Ham_i prime = sum_i hS_i 
+	otms ( hE_i - mean{hE_i})
+;
+
+! now with bold assumption
+$ mean{hE_i} = 0 ; 
+
+! writing that : 
+$ hE prime = hE_i  - mean{ hE_i} ; 
+!
+! \textbf{the cyclic property of trace}
+! means what, any way  ,assumptions ends up in :
+$ forall i  ; 
+@@
+	trr E {
+		hE_i (t)
+		hrho_E (0)
+	}
+& = 0 \\
+	trr E {
+		hrho_E (0)
+		hE_i (t)
+	}
+& = 0 
+; 
+
+! there took main attention at the :
+@@
+  dd {hrho (t)} t 
+&=
+	- al ^2 int_0 ^t
+	trr E {
+		comu {
+			Ham_I (t)
+		} {
+			comu {
+				Ham_I (s)
+			} {
+				hrho_T (0)
+			}
+		}
+	} der s
+;
+
+! and here we have : 
+@@
+  dd {hrho (t)} t
+& = 
+	- al ^2 int_0 ^t
+		trr E {
+			comu{
+				Ham_I (t)
+			}{
+				comu{
+					Ham_I (s)	
+				} {
+					hrho (t)
+					otms
+					hrho_E (0)
+				}
+			}
+		}
+	der s
+;
+! why would here suddenly has the time in 
+$ hrho (t) otms hrho_E (0) ; 
+! and now replacing the variable to :
+$ s imp t -s  ; 
+! then we have that 
+!\textbf{Redfield equation}
+@@ lab 'RedfielEquation'
+  dd {hrho (t)} t
+& = 
+	- al ^2 int_0 ^inf
+		trr E {
+			comu{
+				Ham_I (t)
+			}{
+				comu{
+					Ham_I (s-t)	
+				} {
+					hrho (t)
+					otms
+					hrho_E (0)
+				}
+			}
+		}
+	der s
+;
+
+sH sim H ; 
+! lets say that
+! here we have \textbf{rotating wave approximation}
+@@
+	sH hA defto comu Ham A  
+	forall A in B (maH)
+;
+
+! then we have
+@@
+  hS
+&=
+	sum_om hS_i (om) 
+;
+
+! there is : 
+@@
+  comu Ham {hS_i (om)} 
+&=
+	- om hS_i (om)
+	\\
+  comu Ham {cont hS_i (om)} 
+&=
+	om hS_i (om)
+;
+! then we roll the sheet up with : 
+@@
+  bb{ hH , {hS_i (om)} }
+&=
+	- om hS_i (om) \\ 
+  bb{ hH , [ hH , {hS_i (om)} ]}
+&=
+	 (- om) ^2 hS_i (om) \\ 
+	...
+;
+! so here we would like to see what is the 
+@@ 
+	hS_k (t ,om )
+&=
+	exp{ ii hH t } 
+		hS_k (om )
+	exp{ -ii hH t } 
+;
+! we remember the CBH-forula again :
+@@
+  exp{ la t} mu exp { -la t }
+&= 
+	mu + [la, mu ] t  + 1/{2clmx} [la ,[la,mu]] + ...
+;
+! so there is : 
+@@ 
+	hS_k (t , om )
+&=
+	exp{ ii hH t } 
+		hS_k (om)
+	exp{ -ii hH t } 
+\\&=
+	hS_k (om) sum_{n} { (-ii om t ) ^n }/{n clmx}	
+\\&=
+	hS_k (om) exp{ - ii om t }
+;
+
+! the Environment sims like have nothing 
+! to do with the time , 
+! so we have that  interaction hamiltonian : 
+@@
+  Ham_I  (t) 
+&=	
+	sum_{k , om } 
+		 exp { - ii om t }hat S _k  (om ) otms hat E _k (t)
+;
+! where this 
+$ hE_k (t) ; 
+! has time with it and yet not spreaded 
+! and it is hermitian \\ 
+
+! the paper described this as : 
+@@
+  sH_i (t)
+&=
+	sum_{k,om} exp{-ii om t}
+	hS_k (om) otms sim E _k (t)
+\\&=
+	sum_{k,om} exp{ii om t}
+	cont hS_k (om) otms sim cont E _k  (t)
+;
+! and threading open the Redfield Equation 
+! \eqref{RedfielEquation} 
+! we havee
+
+@@
+  dd {hrho (t)} t
+& = 
+	- al ^2 int_0 ^inf
+		der s trr E {
+			Ham_I (t)
+			,
+			comu{
+				Ham_I (s-t)	
+			} {
+				hrho (t)
+				otms
+				hrho_E (0)
+			}
+		}
+;
+
+@@
+ bb{ 
+		Ham_I (t)
+		,
+		comu{
+			Ham_I (s-t)	
+		} {
+			hrho (t)
+			otms
+			hrho_E (0)
+		}
+	}
+&= 
+ bb{ 
+		Ham_I (t)
+		,
+			Ham_I (s-t)	
+			hrho (t)
+			otms
+			hrho_E (0)
+			- 	
+			hrho (t)
+			otms
+			hrho_E (0)
+			Ham_I (s-t)
+	}
+\\ & = 
+		Ham_I (t) Ham_I (s-t)	hrho (t) otms hrho_E (0)
+		\\ & 
+			- 
+		Ham_I (t) hrho (t) otms hrho_E (0)	Ham_I (s-t)
+		\\ & 
+		-	Ham_I (s-t)hrho (t)otms hrho_E (0) Ham_I (t)
+		\\ & 
+		+ hrho (t) otms hrho_E (0) Ham_I (s-t) Ham_I (t)
+;
+! this paper is full of error

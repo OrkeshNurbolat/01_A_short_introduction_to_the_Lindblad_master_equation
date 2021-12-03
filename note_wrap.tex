@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{tipa}
+\usepackage{bbold}
+\usepackage[colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue,urlcolor=blue,breaklinks=true]{hyperref}
+\usepackage{xkeyval}
+\usepackage{graphicx}
+
+
+%graphics path setups:
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%here is new commands
+
+	% guiding commands
+	\newcommand\AX{\textbf{[Axiom]}}
+	\newcommand\DF{\textbf{[Definitions]}}
+	\newcommand\HP{\textbf{[Hypothesis]}}
+	\newcommand\THY{\textbf{[Theory]}}
+	\newcommand\ID{\textbf{[Pseduo Induction]}}
+	\newcommand\MP{\textbf{[Pseduo Modulus Ponen]}}
+	\newcommand\SB{\textbf{[Pseduo Substitution]}}
+
+
+
+	\newcommand\ra{\rightarrow}
+	\newcommand\Ra{\Rightarrow}
+
+	%\necommand\ii{}
+	\newcommand\df[2]{\dfrac{#1}{#2}}
+	\newcommand\pd[2]{ \dfrac{\partial #1 }{\partial #2} }
+	\newcommand\dd[2]{ \dfrac{d #1 }{d #2} }
+	%\newcommand*\ee{\vcenter{\hbox{\includegraphics{expotent.pdf}}}}
+	%\newcommand*\ii{\vcenter{\hbox{\includegraphics{imagone.pdf}}}}
+	\newcommand*\ee{\mathbb{e}}
+	\newcommand*\ii{\mathbb{i}}
+	\newcommand*\cc{\mathbb{c}}
+	\newcommand*\au{\hat{a}^\dagger}
+	\newcommand*\ad{\hat{a}}
+	\newcommand*\hp{\hat{p}}
+	\newcommand*\hq{\hat{q}}
+	\newcommand*\hH{\hat{H}}
+	\newcommand*\ho{\hbar \omega}
+	\newcommand*\dhalf{\dfrac{1}{2}}
+	\newcommand*\half{\frac{1}{2}}
+	\newcommand*\ket[1]{| #1\rangle }
+	\newcommand*\mean[1]{\langle #1\rangle }
+	\newcommand*\bra[1]{\langle #1| }
+	
+
+	\newcommand\exchangeIntegral[2] {
+		\int #1  \ \ d(#2) = #1 \ #2 - \int #2 \ \ d(#1)
+	}
+	\newcommand\lvb{\bigg|} % long vertical bar
+	\newcommand\pos[2]{
+		\{#1,#2\}
+	}
+	\newcommand\posExpand[2]{
+		\pd{#1}{q} \pd{#2}{p} - \pd{#1}{p} \pd{#2}{q}
+	}
+	\newcommand\exchange[2]{
+		#2 #1
+	}
+
+%here ends new commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\date{\today}
+
+\begin{document}
+
+
+\input{./note.tex}
+
+
+\end{document}
+
+

@@ -1,0 +1,276 @@
+spc <--  
+%%mspc <-- \ 
+rp <-- { \#1 }
+mrp <-- \{ \#1 \}
+clmx <-- ! 
+alt <-- @ 
+void <-- 
+dfrac <-- \dfrac{ \#1 }{ \#2 }
+NL <-- 
+
+lab <-- \label{ \#1 }
+a <-- a 
+b <-- b 
+c <-- c 
+d <-- d 
+e <-- e 
+f <-- f 
+g <-- g 
+h <-- h 
+i <-- i 
+j <-- j 
+k <-- k 
+l <-- l 
+m <-- m 
+n <-- n 
+o <-- o 
+p <-- p 
+q <-- q 
+r <-- r 
+s <-- s 
+t <-- t 
+u <-- u 
+v <-- v 
+w <-- w 
+x <-- x 
+y <-- y 
+z <-- z 
+A <-- A 
+B <-- B 
+C <-- C 
+D <-- D 
+E <-- E 
+F <-- F 
+G <-- G 
+H <-- H 
+I <-- I 
+J <-- J 
+K <-- K 
+L <-- L 
+M <-- M 
+N <-- N 
+O <-- O 
+P <-- P 
+Q <-- Q 
+R <-- R 
+S <-- S 
+T <-- T 
+U <-- U 
+V <-- V 
+W <-- W 
+X <-- X 
+Y <-- Y 
+Z <-- Z 
+psi <-- \psi 
+phi <-- \phi 
+Psi <-- \Psi 
+Phi <-- \Phi 
+dlt <-- \delta 
+Dlt <-- \Delta 
+vrp <-- \varphi 
+ep <-- \epsilon 
+vep <-- \varepsilon 
+om <-- \omega 
+Om <-- \Omega 
+sg <-- \sigma 
+Sg <-- \Sigma 
+al <-- \alpha 
+bta <-- \beta 
+eta <-- \eta 
+mu <-- \mu 
+nv <-- \nu 
+th <-- \theta 
+Th <-- \Theta 
+la <-- \lambda 
+La <-- \Lambda 
+tau <-- \tau 
+rho <-- \rho 
+xi <-- \xi 
+chi <-- \chi 
+gm <-- \gamma 
+Gm <-- \Gamma 
+vkp <-- \varkappa 
+kap <-- \kappa 
+Kap <-- \Kappa 
+hb <-- \hbar 
+zeta <-- \zeta 
+nabla <-- \nabla 
+^ <-- ^{ \#1 }
+_ <-- _{ \#1 }
+by <-- /
+prime <-- '
+dprime <-- ''
+mspc <-- \ 
+m2spc <-- \ \ 
+m4spc <-- \ \ \ \ 
+m8spc <-- \ \ \ \ \ \ \ \ 
+tx <-- \text{ \#1 }
+bpMtx <-- \begin{pmatrix} 
+epMtx <-- \end{pmatrix} 
+Mtx <-- \begin{pmatrix} 
+ \#1 \end{pmatrix} 
+
+bbMtx <-- \begin{bmatrix} 
+ebMtx <-- \end{bmatrix} 
+bMtx <-- \begin{bmatrix} 
+ \#1 \end{bmatrix} 
+
+det <-- \text{det}\ 
+vMtx <-- \begin{vmatrix} 
+ \#1 \end{vmatrix}
+
+etc <-- ...... 
+etc3 <-- ... 
+bp <-- \left( \#1 \right)
+bb <-- \left[ \#1 \right]
+ii <-- \ii 
+ee <-- \ee 
+pi <-- \pi 
+dag <-- \dagger 
+conj <--  \#1 ^*
+cont <--  \#1 ^\dagger 
+tr <-- \text{Tr}\left[ \#1 \right]
+trr <-- \text{Tr}_{ \#1 }\left[ \#2 \right]
+tran <--  \#1 ^T 
+pm <-- \pm 
+mp <-- \mp 
+btms <-- \bigotimes 
+otms <-- \otimes 
+neq <-- \neq 
+geq <-- \geq 
+leq <-- \leq 
+gg <-- \gg 
+ll <-- \ll 
+approx <-- \approx 
+leqs <-- \leqslant 
+defto <-- \equiv 
+hat <-- \hat{ \#1 }
+hh <-- \hat{\hat{ \#1 }}
+bar <-- \bar{ \#1 }
+sim <-- \overset{\sim}{ \#1 }
+tcr <-- \overset{\circ}{ \#1 }
+vec <-- \vec{ \#1 }
+bold <-- \bold{ \#1 }
+boldSymbol <-- \boldsymbol{ \#1 }
+bvec <-- \boldsymbol{ \#1 }
+bot <-- \bot 
+dot <-- \dot  \#1 
+norm <--  || \#1 || 
+inv <-- { \#1 }^{-1}
+prt <-- \partial 
+pd <-- \dfrac{\partial  \#1 }{\partial  \#2 }
+der <-- \bold{d}
+pdn <-- \dfrac{\partial ^{ \#3 } \#1 }{\partial  \#2 ^{ \#3 }}
+dd <-- \dfrac{\bold{d} \#1 }{\bold{d} \#2 }
+ddn <-- \dfrac{\bold{d}^{ \#3 } \#1 }{\bold{d} \#2 ^{ \#3 }}
+ddt <-- \dfrac{\bold{d}}{\bold{d}\text{t }} \#1 
+dert <-- \dfrac{\bold{d} \#1 }{\bold{d}t }
+deri <-- d ( \#1 )
+inf <-- \infty 
+lim <-- \lim 
+prod <-- \prod 
+sum <-- \sum 
+int <-- \int 
+oint <-- \oint 
+oiint <-- \oiint 
+vlb <-- \bigg|
+pb <-- \{ \#1 , \#2 \}
+pbe <-- \dfrac{\partial  \#1 }{\partial q }\dfrac{\partial  \#2 }{\partial p } - \dfrac{\partial  \#1 }{\partial p }\dfrac{\partial  \#2 }{\partial q }
+comu <-- \left[ \#1 \ ,\  \#2 \right]
+comue <--  \#1  \#2 - \#2  \#1 
+indot <-- ( \#1 , \#2 )
+maT <-- \mathcal{T }
+maU <-- \mathcal{U }
+maH <-- \mathcal{H }
+maL <-- \mathcal{L }
+maV <-- \mathcal{V }
+exp <-- \ee ^{ \#1 }
+expr <-- \text{exp}\left( \#1 \right)
+ln <-- \text{ln}
+log <-- \text{log}
+log2 <-- \text{log}_{2}
+sqrt <-- \sqrt{ \#1 }
+cos <-- \cos 
+sin <-- \sin 
+tan <-- \tan 
+atan <-- \arctan
+tanh <-- \tanh
+iff <-- \ \ \text{iff}\ \ 
+st <-- \ \text{s.t.}\ 
+forall <-- \forall 
+exists <-- \exists 
+in <-- \in 
+notin <-- \notin 
+subset <-- \subset 
+supset <-- \supset 
+wedge <-- \wedge 
+vee <-- \vee 
+neg <-- \neg 
+imp <-- \rightarrow 
+Imp <-- \Rightarrow 
+mpst <-- \mapsto 
+lmpst <-- \longmapsto 
+eqv <-- \leftrightarrow 
+Asg <-- \Leftarrow 
+vdash <-- \vdash 
+QED <-- Q .E .D  
+arup <-- \uparrow 
+ardw <-- \downarrow 
+Natural <-- \mathds{N }
+Integer <-- \mathds{Z }
+Complex <-- \mathds{C }
+Real <-- \mathds{R }
+realPart <-- \text{Re}[ \#1 ]
+imagPart <-- \text{Im}[ \#1 ]
+One <-- \mathds{1}
+maE <-- \mathds{E }
+msAny <-- \mathscr{ \#1 }
+msS <-- \msS 
+msU <-- \msU 
+msP <-- \msP 
+msR <-- \msR 
+msL <-- \msL 
+msC <-- \msL 
+msD <-- \msD 
+lbl <-- \label{ \#1 }
+permute <-- \permute{ \#1 }{ \#2 }
+updown <-- \updown{ \#1 }{ \#2 }
+ket <-- | \#1 \rangle 
+bket <-- \left| \#1 \right\rangle 
+bra <-- \langle  \#1 |
+bbra <-- \left\langle  \#1 \right|
+mean <-- \langle  \#1 \rangle 
+bmean <-- \left\langle  \#1 \right\rangle 
+braket <-- {\langle  \#1 | \#2 \rangle}
+bbraket <-- {\left\langle  \#1 \bigg| \#2 \right\rangle}
+ketbra <-- | \#1 \rangle \langle  \#2 |
+bketbra <-- \left| \#1 \right\rangle \left\langle  \#2 \right|
+dket <-- | \#1 \rangle\rangle 
+dbra <-- \langle\langle \#1 |
+dbraket <-- \langle\langle \#1 | \#2 \rangle\rangle 
+%%hA <-- \hat{A }
+%%hO <-- \hat{O }
+hE <-- \hat{E }
+%%hS <-- \hat{S }
+hH <-- \hat{H }
+hA <-- \hat{A }
+hS <-- \hat{S }
+hB <-- \hat{B }
+hO <-- \hat{O }
+hJ <-- \hat{J }
+hL <-- \hat{L }
+SB <-- S B 
+hr <-- \hat{\rho }
+ao <-- \hat{a }
+ad <-- \hat{a }^\dagger 
+bo <-- \hat{b }
+bd <-- \hat{b }^\dagger 
+kp <-- k '
+kpp <-- k ''
+tp <-- t '
+tpp <-- t ''
+np <-- n '
+npp <-- n ''
+Ham <-- \hat{H }
+hrho <-- \hat{\rho }
+sH <-- \overset{\sim}{H }

@@ -1,0 +1,836 @@
+\title{Note about : A short introduction to the Lindblad master equation}
+\author{Orkesh Nurbolat}
+\maketitle
+ \textbf{Glossary} : \\  
+\begin{itemize}
+\item 
+ $ \mathcal{H } $  represents a Hilber space 
+\item 
+ $ |\psi \rangle \in \mathcal{H } $  represents a vector of Hilbert space
+ $ \mathcal{H } $   (a column vector)
+\item 
+ $ \langle \psi |\in \mathcal{H } $  represents a vector of the dual Hilbert space of  
+ $ \mathcal{H } $   (a row vector) . 
+\item 
+ $ {\langle \psi |\phi \rangle}\in \mathds{C } $  is the scakar product of vectors 
+ $ |\psi \rangle  $  and
+ $ |\phi \rangle  $ \item 
+ $  ||\ |\psi \rangle ||  $  is the norm of the vector 
+ $ |\psi \rangle  $  where there is 
+ $  ||\ |\psi \rangle || =\sqrt{{\langle \psi |\psi \rangle}} $ \item 
+ $ B (\mathcal{H }) $  represents the space of bounded operatores : 
+ $ B :\mathcal{H }\mapsto \mathcal{H } $ \item 
+ $ \mathds{1}_{\mathcal{H }}\in B (\mathcal{H }) $  is the identity operator of the Hilber space
+ $ \mathcal{H } $  .s.t.
+ $ \mathds{1}|\psi \rangle =|\psi \rangle ,\forall |\psi \rangle \in \mathcal{H } $ \item 
+ $ |\psi \rangle \langle \phi |\in B (\mathcal{H }) $  is the operator such tath 
+ $ (|\psi \rangle \langle \phi |)|\varphi \rangle ={\langle \phi |\varphi \rangle}|\psi \rangle ,\forall |\varphi \rangle \in \mathcal{H } $ \item 
+ $ \hat{O }^\dagger  $  is the hermitian conjugate of operator : 
+ $ \hat{O }\in B (\mathcal{H }) $ \item
+ $ \hat{U }\in B (\mathcal{H }) $  is the unitary operator iff  
+ $ \hat{U }\hat{U }^\dagger =\hat{U }^\dagger \hat{U }=\mathds{1} $ \item 
+ $ \hat{H }\in B (\mathcal{H }) $  is a Hermitian operator iff  
+ $ \hat{H }=\hat{H }^\dagger  $ \item
+ $ \hat{A }\in B (\mathcal{H }) $  is a positive operator 
+ $ (A >0),\ \ \text{iff}\ \ \langle \phi |\hat{A }|\phi \rangle >0,\forall |\phi \rangle \in \mathcal{H } $ \item 
+ $ \hat{P }\in B (\mathcal{H }) $  is a projector 
+ $ \ \ \text{iff}\ \ \hat{P }\hat{P }=\hat{P } $ \item
+ $ \text{Tr}\left[B \right] $  represents the trace of operator B 
+\item
+ $ \rho (\mathcal{L }) $  repressets the space of density matrices, meaning the space of
+ bounded operators action on
+ $ \mathcal{H } $  with trace 1 and positive
+\item
+ $ |\rho \rangle\rangle  $  is a vector in the Fock-Liouville space
+\item
+ $ \langle\langle\hat{A }|\hat{B }\rangle\rangle =\text{Tr}\left[\hat{A }^\dagger \hat{B }\right] $  is the scalar product of operators 
+ $ \hat{A },\hat{B }\in B (\mathcal{H }) $  in the Fock-Liouville space
+\item
+ $ \overset{\sim}{\mathcal{L }} $  is the matrix representation of a super operator in the
+ Fock-Liuville space
+\end{itemize}
+ \section{Looking back to quantum mechanics}
+\subsection{density matrix}
+ the density matrix is like : 
+(L:151)
+\begin{equation}
+\begin{split}
+\hat{\rho }\equiv \sum _{i }p _{i }|\psi _{i }\rangle \langle \psi _{i }|\end{split}
+\end{equation}
+ and this 
+ $ p _{i } $  coefficient are non-negative and
+ $ \sum p _{i }=1 $  which is a thing called probability , I belive there is 
+ $ p _{i }\in \mathds{R } $  as well .
+ it means that
+ $ p _{i } $  is the probablity that system is in the pure state 
+ $ |\psi _{j }\rangle  $  so there is : 
+(L:168)
+\begin{equation}
+\begin{split}
+\text{Tr}\left[\hat{\rho }\right]&=\sum p _{j }=1\end{split}
+\end{equation}
+ what the trace does is to take the diogonal elements and
+ put them at the place needed
+ all the time this holds
+ and there is aways positive , aka
+(L:178)
+\begin{equation}
+\begin{split}
+\hat{\rho }>0\end{split}
+\end{equation}
+ there is 
+ $ \text{Tr}\left[\hat{\rho }^{2}\right] $  called the purity of the state . 
+ somehow it measures something like 
+ $ \frac{1}{d }\leq \text{Tr}\left[\hat{\rho }^{2}\right]\leq 1 $ \\
+ now, given arbitary basis like : 
+ $ {|i \rangle _{i =1}}^{N } $  which is ofcourse in the Hilbert space , then 
+ the density matrix will be looking like : 
+(L:195)
+\begin{equation}
+\begin{split}
+\hat{\rho }&=\begin{pmatrix} 
+\rho _{00}&\rho _{01}&......&\rho _{0N }\\
+\rho _{10}&\rho _{11}&......&\rho _{0N }\\
+......&......&......&......\\
+\rho _{N 0}&\rho _{N 1}&......&\rho _{N N }\\
+\end{pmatrix} 
+\end{split}
+\end{equation}
+\textit{populations}
+ means the diagonal element of the density matrix , 
+ and there is 
+ $ \rho _{i i }\in \mathds{R }_{0}^{+} $  and also 
+ $ \sum _{i }\rho _{i ,i }=1 $ \\as we know there is  
+ $ \mathcal{H }_{2}=\mathcal{H }\otimes \mathcal{H } $ A pure state of the system would be any unit vector of 
+ $ \mathcal{H }_{2} $  we can say : 
+ $ |\psi \rangle =a |0\rangle +b |1\rangle  $  and 
+ $ a ,b \in \mathds{C } $  s.t
+ $ |a |^{2}+|b |^{2}=a a ^*+b b ^*=1 $  so : 
+ $ \hat{\rho }\in O (\mathcal{H }) $ (L:231)
+\begin{equation}
+\begin{split}
+\hat{\rho }&=\begin{pmatrix} 
+\rho _{00}&\rho _{01}\\
+\rho _{10}&\rho _{11}\\
+\end{pmatrix} 
+=\rho _{00}|0\rangle \langle 0|+\rho _{01}|0\rangle \langle 1|+\rho _{10}|1\rangle \langle 0|+\rho _{11}|1\rangle \langle 1|\end{split}
+\end{equation}
+ and here we have
+(L:246)
+\begin{equation}
+\begin{split}
+\rho _{00}+\rho _{11}&=|{\langle 0|\psi \rangle}|^{2}+|{\langle 1|\psi \rangle}|^{2}=1\end{split}
+\end{equation}
+ and there is as well : 
+(L:254)
+\begin{equation}
+\begin{split}
+\rho _{01}=\rho _{10}^*\end{split}
+\end{equation}
+\subsection{about other operators}
+ an operator is in the form of 
+(L:261)
+\begin{equation}
+\begin{split}
+\hat{O }&=\sum _{i }a _{i }|a _{i }\rangle \langle a _{i }|\end{split}
+\end{equation}
+ where this 
+ $ a _{i }\in \mathds{R } $  is in the operator 
+ $ \hat{O } $  's space 
+ so here we can write that : 
+(L:273)
+\begin{equation}
+\begin{split}
+\langle \hat{O }\rangle &=\sum _{i }p _{i }\text{Tr}\left[\hat{O }\right]\\
+&=\sum _{i }p _{i }\langle \psi _{i }|\hat{O }|\psi _{i }\rangle \\
+&=\sum _{i }\text{Tr}\left[p _{i }|\psi _{i }\rangle \langle \psi _{i }|\hat{O }\right]\\
+&=\text{Tr}\left[\sum _{i }p _{i }|\psi _{i }\rangle \langle \psi _{i }|\hat{O }\right]\\
+&=\text{Tr}\left[\hat{\rho }\hat{O }\right]=\text{Tr}\left[\hat{O }\hat{\rho }\right]\end{split}
+\end{equation}
+ if this operator
+ $ \hat{O } $  has an spectral resolution like : 
+(L:307)
+\begin{equation}
+\begin{split}
+\hat{O }&=\sum _{i }a _{i }|a _{i }\rangle \langle a _{i }|\\
+&=\sum _{i }a _{i }P _{i }\end{split}
+\end{equation}
+ now after the measurement it writes that :
+(L:316)
+\begin{equation}
+\begin{split}
+P (a _{i })&=|{\langle \phi |a _{i }\rangle}|^{2}\end{split}
+\end{equation}
+why there is an :
+ $ a _{i } $  instead of just
+ $ i  $  ? I am confued , 
+ here what it would like to say might be
+ $ a _{i } $  is constant mapped from i , and it can degenerate
+ anyway : 
+(L:333)
+\begin{equation}
+\begin{split}
+\langle \hat{O }\rangle &=\langle \psi |\hat{O }|\psi \rangle \end{split}
+\end{equation}
+ and
+(L:342)
+\begin{equation}
+\begin{split}
+P (a _{i })&=|{\langle \phi |a _{i }\rangle}|^{2}\\
+&=\text{Tr}\left[\hat{\rho }|a _{i }\rangle \langle a _{i }|\right]\end{split}
+\end{equation}
+ and for example it can be writen as : 
+(L:351)
+\begin{equation}
+\begin{split}
+&\text{Tr}\left[[\rho _{00}|0\rangle \langle 0|+\rho _{01}|0\rangle \langle 1|+\rho _{10}|1\rangle \langle 0|+\rho _{11}|1\rangle \langle 1|]|a _{i }\rangle \langle a _{i }|\right]\\
+&=(\rho _{00}|0\rangle \langle 0|+\rho _{11}|1\rangle \langle 1|)|a _{i }\rangle \langle a _{i }|\\
+&=\rho _{00}|{\langle 0|a _{i }\rangle}|^{2}+\rho _{11}|{\langle 1|a _{i }\rangle}|^{2}\end{split}
+\end{equation}
+ and then here it writes that : 
+(L:373)
+\begin{equation}
+\begin{split}
+\langle \hat{O }\rangle &=\text{Tr}\left[\hat{O }\hat{\rho }\right]\end{split}
+\end{equation}
+ a minimal Hamiltonina looks like : 
+(L:380)
+\begin{equation}
+\begin{split}
+\hat{H }&=E _{0}|0\rangle \langle 0|+E _{1}|1\rangle \langle 1|\end{split}
+\end{equation}
+ and we say that
+ $ \psi =a |0\rangle +b |1\rangle  $  so here comes that : 
+(L:390)
+\begin{equation}
+\begin{split}
+P (E _{0})=|{\langle 0|\psi \rangle}|^{2}=|a |^{2}\\
+P (E _{1})=|{\langle 1|\psi \rangle}|^{2}=|b |^{2}\end{split}
+\end{equation}
+ so there we have that : 
+(L:394)
+\begin{equation}
+\begin{split}
+\langle \hat{H }\rangle &=E _{0}|a |^{2}+E _{1}|b |^{2}\end{split}
+\end{equation}
+ in the language of density matrix : 
+(L:402)
+\begin{equation}
+\begin{split}
+\hat{\rho }&=\rho _{00}|0\rangle \langle 0|+\rho _{01}|0\rangle \langle 1|+\rho _{10}|1\rangle \langle 0|+\rho _{11}|1\rangle \langle 1|\end{split}
+\end{equation}
+ now here the writer changed the language back to that : 
+ $ P (0)=\text{Tr}\left[|0\rangle \langle 0|\hat{\rho }\right]=\rho _{00} $  and we have that:
+(L:416)
+\begin{equation}
+\begin{split}
+\langle \hat{H }\rangle &=\text{Tr}\left[\hat{H }\hat{\rho }\right]=E _{0}\rho _{00}+E _{1}\rho _{11}\end{split}
+\end{equation}
+ so we can know that here we have : 
+ $ \rho _{00}=|a |^{2} $  and
+ $ \rho _{11}=|b |^{2} $  and we know that : 
+(L:430)
+\begin{equation}
+\begin{split}
+\dfrac{\text{d }}{\text{dt}}|\psi (t )\rangle &=-\ii \hbar \hat{H }|\psi (t )\rangle \end{split}
+\end{equation}
+ this papers like to set that : 
+ $ \hbar =1 $  and we wil have the time independent
+ $ \hat{H } $  causing  : 
+(L:441)
+\begin{equation}
+\begin{split}
+|\psi (t )\rangle &=\ee ^{-\ii \hat{H }t }|\psi (0)\rangle \end{split}
+\end{equation}
+ which is as well as  :
+(L:447)
+\begin{equation}
+\begin{split}
+|\psi (t )\rangle &=\hat{U }|\psi (0)\rangle \end{split}
+\end{equation}
+ here we know that : 
+ $ \hat{U }\in B (\mathcal{H })\ \text{s.t.}\ \hat{U }\hat{U }^\dagger =\hat{U }^\dagger \hat{U }=\mathds{1} $  so here also have something speaking that : 
+(L:465)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }}{\bold{d}t }&=-\ii [\hat{H },\hat{\rho }]\equiv \mathcal{L }\hat{\rho }\end{split}
+\end{equation}
+ which was called von Neumann equation 
+ and then here goes like 
+(L:475)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}}{\bold{d}t }\text{Tr}\left[\hat{\rho }\right]^{2}&=\text{Tr}\left[\dfrac{\bold{d}\hat{\rho }^{2}}{\bold{d}t }\right]\\
+&=\text{Tr}\left[2\hat{\rho }\dfrac{\bold{d}\hat{\rho }}{\bold{d}t }\right]\\
+&=-2\ii \text{Tr}\left[\hat{\rho }[\hat{H },\hat{\rho }]\right]\\
+&=0\end{split}
+\end{equation}
+ now we can write that : 
+(L:488)
+\begin{equation}
+\begin{split}
+\hat{H }_{free}=E _{0}|0\rangle \langle 0|+E _{1}|1\rangle \langle 1|\end{split}
+\end{equation}
+ why wont one start with 
+ $ |\psi (0)\rangle =|1\rangle  $  so that we have 
+ $ |\psi (t )\rangle =\ee ^{-\ii \hat{H }t }=\ee ^{-\ii E _{1}t }|1\rangle  $  I dont know if we can actually do this without losing any generality : 
+(L:499)
+\begin{equation}
+\begin{split}
+\hat{H }_{free}=E |1\rangle \langle 1|\end{split}
+\end{equation}
+ and then there goes that : 
+(L:504)
+\begin{equation}
+\begin{split}
+\hat{H }&=E |1\rangle \langle 1|+\Omega (|0\rangle \langle 1|+|1\rangle \langle 0|)\end{split}
+\end{equation}
+ and in the ine it has something to say that : 
+(L:512)
+\begin{equation}
+\begin{split}
+\mathcal{H }&=\mathcal{H }_{1}\otimes \mathcal{H }_{2}\otimes ...\otimes \mathcal{H }_{N }\\
+|\psi \rangle &=|\psi _{1}\rangle \otimes |\psi _{2}\rangle \otimes ...\otimes |\psi _{N }\rangle \\
+\hat{\rho }&=\hat{\rho }_{1}\otimes \hat{\rho }_{2}\otimes ...\otimes \hat{\rho }_{N }\end{split}
+\end{equation}
+ so for simpler use we just say that : 
+ $ |\psi \rangle =|\psi _{1}\rangle \otimes |\psi _{2}\rangle  $  for seperatable varaibales ofcouse here we say that : 
+ $ |\psi \rangle =\sum _{i ,j }|\psi _{i }\rangle \otimes |\psi _{j }\rangle  $  \\
+ so now if we have that
+ $ \mathcal{H }=\mathcal{H }_{1}\otimes \mathcal{H }_{2} $  and the density matrix could be expressed as 
+(L:537)
+\begin{equation}
+\begin{split}
+\hat{\rho }_{a }&=\text{Tr}_{b }[\hat{\rho }]\end{split}
+\end{equation}
+ because 
+(L:545)
+\begin{equation}
+\begin{split}
+\text{Tr}_{b }\left[\sum _{i ,j ,k ,l }|a _{i }\rangle \langle a _{j }|\otimes |b _{k }\rangle \langle b _{l }|\right]&=\sum _{i ,j }|a _{i }\rangle \langle a _{j }|\text{Tr}\left[\sum _{k ,l }|b _{k }\rangle \langle b _{l }|\right]\end{split}
+\end{equation}
+\subsection{2 level atioms example}
+ say : 
+(L:562)
+\begin{equation}
+\begin{split}
+|00\rangle &=|0\rangle _{1}\otimes |0\rangle _{2}\\
+|01\rangle &=|0\rangle _{1}\otimes |1\rangle _{2}\\
+|10\rangle &=|1\rangle _{1}\otimes |0\rangle _{2}\\
+|11\rangle &=|1\rangle _{1}\otimes |1\rangle _{2}\\
+\end{split}
+\end{equation}
+ is better with : 
+(L:570)
+\begin{equation}
+\begin{split}
+|\psi \rangle _{G }&=|00\rangle \\
+|\psi \rangle _{S }&=\frac{1}{\sqrt{2}}(|0\rangle _{1}+|1\rangle _{1})\otimes \frac{1}{\sqrt{2}}(|0\rangle _{2}+|1\rangle _{2})\\
+&=\frac{1}{2}(|00\rangle +|10\rangle +|01\rangle +|11\rangle )\\
+|\psi \rangle _{E }&=\frac{1}{\sqrt{2}}(|00\rangle +|11\rangle )\end{split}
+\end{equation}
+ so here it can write that 
+(L:585)
+\begin{equation}
+\begin{split}
+\hat{\rho }_{E }&=\frac{1}{2}(|00\rangle \langle 00|+|00\rangle \langle 11|+|11\rangle \langle 00|+|11\rangle \langle 11|)\end{split}
+\end{equation}
+ and lets say there : 
+(L:592)
+\begin{equation}
+\begin{split}
+\hat{\rho }_{E }^{(1)}&=\langle 0|_{2}\hat{\rho }_{E }|0\rangle _{2}+\langle 1|_{2}\hat{\rho }_{E }|1\rangle _{2}\\
+&=\frac{1}{2}(|00\rangle \langle 00|_{1}+|11\rangle \langle 11|_{2})\end{split}
+\end{equation}
+ \subsection{Fock-Liouvile Hlbert space  (FLS)}
+ defineing the thing like : 
+ $ \hat{\rho }\rightarrow |\hat{\rho }\rangle\rangle  $  so there is a realation that writes : 
+(L:612)
+\begin{equation}
+\begin{split}
+|\hat{\rho }\rangle\rangle &=\begin{pmatrix} 
+\rho _{00}\\
+\rho _{10}\\
+\rho _{01}\\
+\rho _{11}\\
+\end{pmatrix} 
+\end{split}
+\end{equation}
+ and then it says that it has the Liouvillian superoperator 
+ can bow be expressed as a matrix 
+(L:625)
+\begin{equation}
+\begin{split}
+\overset{\sim}{\mathcal{L }}&=\begin{pmatrix} 
+0&\ii \Omega &-\ii \Omega &0\\
+\ii \Omega &\ii E &0&-\ii \Omega \\
+-\ii \Omega &0-\ii E &\ii \Omega \\
+0&-\ii \Omega &\ii \Omega &0\end{pmatrix} 
+\end{split}
+\end{equation}
+ this is kindof like a Schrodingers equation thoght : 
+ $ \dfrac{\bold{d}|\hat{\rho }\rangle\rangle }{\bold{d}t }=\overset{\sim}{\mathcal{L }}|\hat{\rho }\rangle\rangle  $ (L:638)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}}{\bold{d}t }\begin{pmatrix} 
+\rho _{00}\\
+\rho _{10}\\
+\rho _{01}\\
+\rho _{11}\\
+\end{pmatrix} 
+&=\begin{pmatrix} 
+0&\ii \Omega &-\ii \Omega &0\\
+\ii \Omega &\ii E &0&-\ii \Omega \\
+-\ii \Omega &0-\ii E &\ii \Omega \\
+0&-\ii \Omega &\ii \Omega &0\end{pmatrix} 
+\begin{pmatrix} 
+\rho _{00}\\
+\rho _{10}\\
+\rho _{01}\\
+\rho _{11}\\
+\end{pmatrix} 
+\end{split}
+\end{equation}
+\section{ CPT-MAPS and the Lindblad Master Equation }
+\subsection{what is Lindblad master equation}
+(L:665)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }}{\bold{d}t }&=-\frac{\ii }{\hbar }\left[\hat{H }\ ,\ \hat{\rho }\right]+\sum _{n ,m =1}^{N ^{2-1}}h _{n m \left(\hat{A }_{n }\hat{\rho }\hat{A }_{m }^\dagger -\frac{1}{2}\{\hat{A }_{m }^\dagger \hat{A }_{n },\hat{\rho }\}\right)}\end{split}
+\end{equation}
+ it gives : 
+\begin{itemize}
+\item
+ $ \{\hat{A }_{m }\} $  : arbitary orthonormal basis 
+ that satisfies :
+ $ ||\hat{A }||_{H S }^{2}=\sum _{i \in I }||\hat{A }e _{i }||^{2} $  or Hilbert-Schmidt operator
+ $ \hat{A }_{N ^{2}} $  is proportional to the identiy operator
+\item
+ $ h _{[\text{Escaped}\ nm]} $ : must be positive semidefinite 
+ with it being all zero, there it back to 
+ $ \dfrac{\bold{d}\hat{\rho }}{\bold{d}t }=-(\ii /\hbar )\left[\hat{H }\ ,\ \hat{\rho }\right] $ \end{itemize}
+\subsection{Completely positve maps  (CPT)}
+ so there need a kind of map
+(L:698)
+\begin{equation}
+\begin{split}
+\mathcal{V }:\hat{\rho }(\mathcal{H })\mapsto \hat{\rho }(\mathcal{H })\end{split}
+\end{equation}
+ it will need :
+(L:701)
+\begin{equation}
+\begin{split}
+\text{Tr}\left[\mathcal{V }\hat{A }\right]&=\text{Tr}\left[\hat{A }\right]\ \ \ \ \forall A \in O (\mathcal{H })\end{split}
+\end{equation}
+ and it need to be completely positive , which means :
+(L:709)
+\begin{equation}
+\begin{split}
+&\mathcal{V }\text{\ is\ positive\ }\ \ \text{iff}\ \ \forall A \in B (\mathcal{H })\ \text{s.t.}\ A \geq 0\Rightarrow \mathcal{V }A \geq 0\\
+&\mathcal{V }\text{\ is\ completly\ positive\ }\ \ \text{iff}\ \ \forall n \in \mathds{N }\ \text{s.t.}\ ,\mathcal{V }\otimes \mathds{1}_{n }\text{\ is\ positive\ }\end{split}
+\end{equation}
+ so the positive means that it has all the eigen values positive
+ not all maps are completely positive , for example : 
+(L:720)
+\begin{equation}
+\begin{split}
+|\psi _{B }\rangle &=\frac{1}{\sqrt{2}}(|01\rangle +|10\rangle )\end{split}
+\end{equation}
+ so there is its density matrix : 
+(L:728)
+\begin{equation}
+\begin{split}
+\hat{\rho }_{B }&=\frac{1}{2}(|0\rangle \langle 0|\otimes |1\rangle \langle 1|+|1\rangle \langle 1|\otimes |0\rangle \langle 0|+|0\rangle \langle 1|\otimes |1\rangle \langle 0|+|1\rangle \langle 0|\otimes |0\rangle \langle 1|)\\
+&=\frac{1}{2}\left\{\begin{pmatrix} 
+1&0\\
+0&0\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+0&0\\
+0&1\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&0\\
+0&1\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+1&0\\
+0&0\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&0\\
+1&0\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+0&1\\
+0&0\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&1\\
+0&0\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+0&0\\
+1&0\\
+\end{pmatrix} 
+\right\}\\
+&=\frac{1}{2}\left\{\begin{pmatrix} 
+0&0&0&0\\
+0&1&0&0\\
+0&0&0&0\\
+0&0&0&0\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&0&0&0\\
+0&0&0&0\\
+0&0&1&0\\
+0&0&0&0\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&0&0&0\\
+0&0&0&0\\
+0&1&0&0\\
+0&0&0&0\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&0&0&0\\
+0&0&1&0\\
+0&0&0&0\\
+0&0&0&0\\
+\end{pmatrix} 
+\right\}\\
+&=\frac{1}{2}\begin{pmatrix} 
+0&0&0&0\\
+0&1&1&0\\
+0&1&1&0\\
+0&0&0&0\\
+\end{pmatrix} 
+\end{split}
+\end{equation}
+ that looks positive , but : 
+ given that 
+ $ \hat{\hat{T _{2}}} $  is a map called transformation which works on matrix  (aka operators)like
+ $ \mathcal{V } $  means that we transpose the matrxi of the secound subsystem 
+ now it gives that
+(L:814)
+\begin{equation}
+\begin{split}
+(\mathds{1}\otimes \hat{\hat{T _{2}}})\hat{\rho }_{B }&=\frac{1}{2}\left\{\begin{pmatrix} 
+1&0\\
+0&0\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+0&0\\
+0&1\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&0\\
+0&1\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+1&0\\
+0&0\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&0\\
+1&0\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+0&0\\
+1&0\\
+\end{pmatrix} 
++\begin{pmatrix} 
+0&1\\
+0&0\\
+\end{pmatrix} 
+\otimes \begin{pmatrix} 
+0&1\\
+0&0\\
+\end{pmatrix} 
+\right\}\\
+&=\begin{pmatrix} 
+0&0&0&1\\
+0&1&0&0\\
+0&0&1&0\\
+1&0&0&0\\
+\end{pmatrix} 
+\end{split}
+\end{equation}
+ and its eigen value has -1 in it , 
+ \subsection{ Drivation of the Lindblad eqiation from microscopic dynamics}
+(L:864)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }_{T }(t )}{\bold{d}t }&=-\ii [\hat{H }_{T },\hat{\rho }_{T }(t )]\end{split}
+\end{equation}
+ T is short for total , E is short for Enviroment, non mean system .
+(L:872)
+\begin{equation}
+\begin{split}
+\hat{\rho }(t )&=\text{Tr}_{E }[\hat{\rho }_{T }(t )]\end{split}
+\end{equation}
+ so now the environment is cut out with trace . 
+ set this to make things simplier : 
+(L:879)
+\begin{equation}
+\begin{split}
+\hat{H }_{T }&=\hat{H }_{S }\otimes \mathds{1}_{E }+\mathds{1}_{S }\otimes \hat{H }_{E }+\alpha \hat{H }_{I }\end{split}
+\end{equation}
+ (
+ $ \hat{H }\in \mathcal{H } $  , 
+ $ \hat{H }_{E }\in \mathcal{H }_{E } $  , 
+ $ \hat{H }_{I }\in \mathcal{H }_{T } $  
+)
+(L:891)
+\begin{equation}
+\begin{split}
+\hat{H }_{I }&=\sum _{i }\hat{S }_{i }\otimes \hat{E }_{i }\end{split}
+\end{equation}
+ (
+ $ \hat{S }_{i }\in B (\mathcal{H }) $  ,  
+ $ \hat{E }_{i }\in B (\mathcal{H }_{E }) $ )
+ for
+ $ \hat{O }\in B (\mathcal{H }_{T }) $  there is 
+(L:907)
+\begin{equation}
+\begin{split}
+\hat{O }(t )&=\ee ^{\ii (\hat{H }+\hat{H }_{E })t }\hat{O }\ee ^{-\ii (\hat{H }+\hat{H }_{E })t }\end{split}
+\end{equation}
+(L:916)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }_{T }(t )}{\bold{d}t }&=-\ii \alpha [\hat{H }_{I }(t ),\hat{\rho }_{T }(t )]\end{split}
+\end{equation}
+ $ \alpha  $  comes from the interaction coefficinet ? 
+ integrate by time gives : 
+(L:927)
+\begin{equation}
+\begin{split}
+\int \dfrac{\bold{d}\hat{\rho }_{T }(t )}{\bold{d}t }\bold{d}t &=-\ii \alpha \int [\hat{H }_{I }(t ),\hat{\rho }_{T }(t )]\bold{d}t \end{split}
+\end{equation}
+(L:939)
+\begin{equation}
+\begin{split}
+\hat{\rho }_{T }(t )&=-\ii \alpha \int [\hat{H }_{I }(t ),\hat{\rho }_{T }(t )]\bold{d}t \\
+&=\hat{\rho }_{T }(0)-\ii \alpha \int _{0}^{t }[\hat{H }_{I }(s ),\hat{\rho }_{T }(s )]\bold{d}s \end{split}
+\end{equation}
+ skadoodling around gives : 
+(L:956)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }_{T }(t )}{\bold{d}t }&=-\ii \alpha [\hat{H }_{I }(t ),\hat{\rho }_{T }(0)]-\alpha ^{2}\int _{0}^{t }[\hat{H }_{I }(t ),[\hat{H }_{I }(s ),\hat{\rho }_{T }(s )]]\bold{d}s \end{split}
+\end{equation}
+ lets do this again , this gives :  
+(L:967)
+\begin{equation}
+\begin{split}
+\int _{0}^{t }\dfrac{\bold{d}\hat{\rho }_{T }(t ')}{\bold{d}t '}\bold{d}t '&=\hat{\rho }_{T }(t )-\hat{\rho }_{T }(0)\\
+&=\int _{0}^{t }\bold{d}t '\left(-\ii \alpha [\hat{H }_{I }(t '),\hat{\rho }_{T }(0)]-\alpha ^{2}\int _{0}^{t '}\bold{d}s [\hat{H }_{I }(t '),[\hat{H }_{I }(s ),\hat{\rho }_{T }(s )]]\right)\\
+&=-\ii \alpha \int _{0}^{t }\left[\hat{H }_{I }(t '),\hat{\rho }_{T }(0)\right]\bold{d}t '-\alpha ^{2}\int _{0}^{t }\bold{d}t '\int _{0}^{t '}\bold{d}s [\hat{H }_{I }(t '),[\hat{H }_{I }(s ),\hat{\rho }_{T }(s )]]\end{split}
+\end{equation}
+ and do derivation over the result gives : 
+ so there is 
+(L:990)
+\begin{equation}
+\begin{split}
+\hat{\rho }_{T }(t )&=\hat{\rho }_{T }(0)-\ii \alpha \int _{0}^{t }\left[\hat{H }_{I }(t '),\hat{\rho }_{T }(0)\right]\bold{d}t '-\alpha ^{2}\int _{0}^{t }\bold{d}t '\int _{0}^{t '}\bold{d}s [\hat{H }_{I }(t '),[\hat{H }_{I }(s ),\hat{\rho }_{T }(s )]]\end{split}
+\end{equation}
+ do another commutationover this yields
+(L:1003)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }_{T }}{\bold{d}(t )}t &=-\ii \alpha \left[\hat{H }_{I }(t ),\hat{\rho }_{T }(t )\right]\\
+&=-\ii \alpha \left[\hat{H }_{I }(t ),\hat{\rho }_{T }(0)-\ii \alpha \int _{0}^{t }\left[\hat{H }_{I }(t '),\hat{\rho }_{T }(0)\right]\bold{d}t '-\alpha ^{2}\int _{0}^{t }\bold{d}t '\int _{0}^{t '}\bold{d}s [\hat{H }_{I }(t '),[\hat{H }_{I }(s ),\hat{\rho }_{T }(s )]]\right]\\
+&=-\ii \alpha \left[\hat{H }_{I }(t ),\hat{\rho }_{T }(0)\right]-\alpha ^{2}\left[\hat{H }_{I }(t ),\int _{0}^{t }\bold{d}t '\left[\hat{H }_{I }(t '),\hat{\rho }_{T }(0)\right]\right]+O (\alpha ^{3})\end{split}
+\end{equation}
+ and we got : 
+(L:1035)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }_{T }(t )}{\bold{d}t }&=-\ii \alpha [\hat{H }_{I }(t ),\hat{\rho }_{t }(t )]\\
+&=-\ii \alpha \left[\hat{H }_{I }(t )\ \ \ \ ,\ \ \ \ \hat{\rho }_{T }(0)+\int _{0}^{t }\left[-\ii \alpha [\hat{H }_{I }(s ),\hat{\rho }_{T }(0)]\right]\bold{d}s \right]+O (\alpha ^{3})\\
+&=-\ii \alpha \left[\hat{H }_{I }(t )\ ,\ \hat{\rho }_{T }(0)\right]-\alpha ^{2}\int _{0}^{t }\left[\hat{H }_{I }(t )\left[\hat{H }_{I }(s )\ ,\ \hat{\rho }_{T }(0)\right]\ ,\ \bold{d}\right]s +O (\alpha ^{3})\end{split}
+\end{equation}
+ so we know that 
+(L:1066)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }_{T }(t )}{\bold{d}t }&=-\ii \alpha \left[\hat{H }_{I }(t )\ ,\ \hat{\rho }_{T }(0)\right]-\alpha ^{2}\int _{0}^{t }\left[\hat{H }_{I }(t )\ ,\ \left[\hat{H }_{I }(s )\ ,\ \hat{\rho }_{T }(0)\right]\right]\bold{d}s \end{split}
+\end{equation}
+ with the
+ $ \hat{\rho }_{T } $  we could have the
+ $ \hat{\rho } $  so : 
+(L:1092)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }(t )}{\bold{d}t }&=\text{Tr}_{E }\left[\dfrac{\bold{d}\hat{\rho }_{T }(t )}{\bold{d}t }\right]\\
+&=-\ii \alpha \text{Tr}_{E }\left[\left[\hat{H }_{I }(t )\ ,\ \hat{\rho }_{T }(0)\right]\right]-\alpha ^{2}\int _{0}^{t }\text{Tr}_{E }\left[\left[\hat{H }_{I }(t )\ ,\ \left[\hat{H }_{I }(s )\ ,\ \hat{\rho }_{T }(0)\right]\right]\right]\bold{d}s \end{split}
+\end{equation}
+ $ \hat{\rho } $  is dependnet on  
+ $ \hat{\rho }_{T } $  and for start condition , it can have sperable state  
+ $ \hat{\rho }_{T }(0)=\hat{\rho }(0)\otimes \hat{\rho }_{E }(0) $  here assumes that the environtment is thermal , whichmeans
+(L:1126)
+\begin{equation}
+\begin{split}
+\hat{\rho }_{E }(0)=\dfrac{\text{exp}\left(-\frac{\hat{H }_{E }}{T }\right)}{\text{Tr}\left[\text{exp}\left(-\frac{\hat{H }_{E }}{T }\right)\right]}\end{split}
+\end{equation}
+  (with respection 
+ $ k _{B }=1 $ )
+ and this gives  :
+(L:1136)
+\begin{equation}
+\begin{split}
+\langle \hat{E }_{i }\rangle &=\text{Tr}\left[\hat{E }_{i }\hat{\rho }_{E }(0)\right]\\
+\end{split}
+\end{equation}
+ for 
+ $ t =0 $  we can have that :
+(L:1145)
+\begin{equation}
+\begin{split}
+\text{Tr}_{E }\left[\left[\hat{H }_{I }(t )\ ,\ \hat{\rho }_{T }(0)\right]\right]&=\sum _{i }\left(\hat{S }_{i }(t )\hat{\rho }(0)\text{Tr}_{E }\left[\hat{E }_{i }(t )\hat{\rho }_{E }(0)\right]-\hat{\rho }(0)\hat{S }_{i }(t )\text{Tr}_{E }\left[\hat{\rho }_{E }(0)\hat{E _{i }}(t )\right]\right)\end{split}
+\end{equation}
+ so here I can infer that : 
+(L:1164)
+\begin{equation}
+\begin{split}
+\left[\hat{H }_{I }(t )\ ,\ \hat{\rho }_{T }(0)\right]&=\hat{H }_{I }(t )\hat{\rho }_{T }(0)-\hat{\rho }_{T }(0)\hat{H }_{I }(t )\end{split}
+\end{equation}
+ what evein is this index
+ $ i  $  doing here ? what is the constraints ? \\
+ any way , lets just assume that 
+ $ \langle \hat{E }_{i }\rangle =\text{Tr}\left[\hat{E }_{i }\hat{\rho }_{E }(0)\right]=0 $  independt pf
+ $ i  $  and it gives  
+ anyway , before , we have that  
+(L:1176)
+\begin{equation}
+\begin{split}
+\hat{H }_{T }&=\hat{H }_{S }\otimes \mathds{1}_{E }+\mathds{1}_{S }\otimes \hat{H }_{E }+\alpha \hat{H }_{I }\end{split}
+\end{equation}
+ but now lets write it this way : 
+(L:1183)
+\begin{equation}
+\begin{split}
+\hat{H }_{T }&=(\hat{H }_{S }+\alpha \sum _{i }\langle \hat{E }_{i }\rangle \hat{S }_{i })+\hat{H }_{E }+\alpha \hat{H }_{i }'\end{split}
+\end{equation}
+reminding :  
+(L:1190)
+\begin{equation}
+\begin{split}
+\hat{H }_{i }'=\sum _{i }\hat{S }_{i }\otimes (\hat{E }_{i }-\langle \hat{E }_{i }\rangle )\end{split}
+\end{equation}
+ now with bold assumption
+ $ \langle \hat{E }_{i }\rangle =0 $  writing that : 
+ $ \hat{E }'=\hat{E }_{i }-\langle \hat{E }_{i }\rangle  $  \textbf{the cyclic property of trace}
+ means what, any way  ,assumptions ends up in :
+ $ \forall i  $ (L:1204)
+\begin{equation}
+\begin{split}
+\text{Tr}_{E }\left[\hat{E }_{i }(t )\hat{\rho }_{E }(0)\right]&=0\\
+\text{Tr}_{E }\left[\hat{\rho }_{E }(0)\hat{E }_{i }(t )\right]&=0\end{split}
+\end{equation}
+ there took main attention at the :
+(L:1218)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }(t )}{\bold{d}t }&=-\alpha ^{2}\int _{0}^{t }\text{Tr}_{E }\left[\left[\hat{H }_{I }(t )\ ,\ \left[\hat{H }_{I }(s )\ ,\ \hat{\rho }_{T }(0)\right]\right]\right]\bold{d}s \end{split}
+\end{equation}
+ and here we have : 
+(L:1236)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }(t )}{\bold{d}t }&=-\alpha ^{2}\int _{0}^{t }\text{Tr}_{E }\left[\left[\hat{H }_{I }(t )\ ,\ \left[\hat{H }_{I }(s )\ ,\ \hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\right]\right]\right]\bold{d}s \end{split}
+\end{equation}
+ why would here suddenly has the time in 
+ $ \hat{\rho }(t )\otimes \hat{\rho }_{E }(0) $  and now replacing the variable to :
+ $ s \rightarrow t -s  $  then we have that 
+\textbf{Redfield equation}
+(L:1261)
+\begin{equation}
+\begin{split}
+\label{RedfielEquation}\dfrac{\bold{d}\hat{\rho }(t )}{\bold{d}t }&=-\alpha ^{2}\int _{0}^{\infty }\text{Tr}_{E }\left[\left[\hat{H }_{I }(t )\ ,\ \left[\hat{H }_{I }(s -t )\ ,\ \hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\right]\right]\right]\bold{d}s \end{split}
+\end{equation}
+ lets say that
+ here we have \textbf{rotating wave approximation}
+(L:1284)
+\begin{equation}
+\begin{split}
+\overset{\sim}{H }\hat{A }\equiv \left[\hat{H }\ ,\ A \right]\forall A \in B (\mathcal{H })\end{split}
+\end{equation}
+ then we have
+(L:1290)
+\begin{equation}
+\begin{split}
+\hat{S }&=\sum _{\omega }\hat{S }_{i }(\omega )\end{split}
+\end{equation}
+ there is : 
+(L:1297)
+\begin{equation}
+\begin{split}
+\left[\hat{H }\ ,\ \hat{S }_{i }(\omega )\right]&=-\omega \hat{S }_{i }(\omega )\\
+\left[\hat{H }\ ,\ \hat{S }_{i }^\dagger (\omega )\right]&=\omega \hat{S }_{i }(\omega )\end{split}
+\end{equation}
+ then we roll the sheet up with : 
+(L:1307)
+\begin{equation}
+\begin{split}
+\left[\hat{H },\hat{S }_{i }(\omega )\right]&=-\omega \hat{S }_{i }(\omega )\\
+\left[\hat{H },[\hat{H },\hat{S }_{i }(\omega )]\right]&=(-\omega )^{2}\hat{S }_{i }(\omega )\\
+...\end{split}
+\end{equation}
+ so here we would like to see what is the 
+(L:1317)
+\begin{equation}
+\begin{split}
+\hat{S }_{k }(t ,\omega )&=\ee ^{\ii \hat{H }t }\hat{S }_{k }(\omega )\ee ^{-\ii \hat{H }t }\end{split}
+\end{equation}
+ we remember the CBH-forula again :
+(L:1325)
+\begin{equation}
+\begin{split}
+\ee ^{\lambda t }\mu \ee ^{-\lambda t }&=\mu +[\lambda ,\mu ]t +\frac{1}{2! }[\lambda ,[\lambda ,\mu ]]+...\end{split}
+\end{equation}
+ so there is : 
+(L:1331)
+\begin{equation}
+\begin{split}
+\hat{S }_{k }(t ,\omega )&=\ee ^{\ii \hat{H }t }\hat{S }_{k }(\omega )\ee ^{-\ii \hat{H }t }\\
+&=\hat{S }_{k }(\omega )\sum _{n }\frac{(-\ii \omega t )^{n }}{n ! }\\
+&=\hat{S }_{k }(\omega )\ee ^{-\ii \omega t }\end{split}
+\end{equation}
+ the Environment sims like have nothing 
+ to do with the time , 
+ so we have that  interaction hamiltonian : 
+(L:1346)
+\begin{equation}
+\begin{split}
+\hat{H }_{I }(t )&=\sum _{k ,\omega }\ee ^{-\ii \omega t \hat{S }}_{k }(\omega )\otimes \hat{E }_{k }(t )\end{split}
+\end{equation}
+ where this 
+ $ \hat{E }_{k }(t ) $  has time with it and yet not spreaded 
+ and it is hermitian \\ 
+ the paper described this as : 
+(L:1358)
+\begin{equation}
+\begin{split}
+\overset{\sim}{H }_{i }(t )&=\sum _{k ,\omega }\ee ^{-\ii \omega t }\hat{S }_{k }(\omega )\otimes \overset{\sim}{E }_{k }(t )\\
+&=\sum _{k ,\omega }\ee ^{\ii \omega t }\hat{S }_{k }^\dagger (\omega )\otimes \overset{\sim}{E ^\dagger }_{k }(t )\end{split}
+\end{equation}
+ and threading open the Redfield Equation 
+ \eqref{RedfielEquation} 
+ we havee
+(L:1371)
+\begin{equation}
+\begin{split}
+\dfrac{\bold{d}\hat{\rho }(t )}{\bold{d}t }&=-\alpha ^{2}\int _{0}^{\infty }\bold{d}s \text{Tr}_{E }\left[\hat{H }_{I }(t ),\left[\hat{H }_{I }(s -t )\ ,\ \hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\right]\right]\end{split}
+\end{equation}
+(L:1388)
+\begin{equation}
+\begin{split}
+\left[\hat{H }_{I }(t ),\left[\hat{H }_{I }(s -t )\ ,\ \hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\right]\right]&=\left[\hat{H }_{I }(t ),\hat{H }_{I }(s -t )\hat{\rho }(t )\otimes \hat{\rho }_{E }(0)-\hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\hat{H }_{I }(s -t )\right]\\
+&=\hat{H }_{I }(t )\hat{H }_{I }(s -t )\hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\\
+&-\hat{H }_{I }(t )\hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\hat{H }_{I }(s -t )\\
+&-\hat{H }_{I }(s -t )\hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\hat{H }_{I }(t )\\
+&+\hat{\rho }(t )\otimes \hat{\rho }_{E }(0)\hat{H }_{I }(s -t )\hat{H }_{I }(t )\end{split}
+\end{equation}
+ this paper is full of error
